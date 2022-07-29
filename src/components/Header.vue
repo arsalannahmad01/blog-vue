@@ -1,7 +1,7 @@
 <template>
 <div class="header">
 <router-link to="/" >Home</router-link>
-<router-link to="/" >Create blog</router-link>
+<router-link to="/create-blog" >Create blog</router-link>
 <a v-on:click="logout" href="#" >Logout</a>
 </div>
 </template>
@@ -12,11 +12,14 @@ export default {
     name:"HeaderCompo",
     methods: {
         logout() {
-            sessionStorage.clear()
+            localStorage.removeItem('token')
             this.$router.push({name:'LogIn'})
         }
     }
 }
+
+
+
 
 </script>
 
@@ -24,8 +27,8 @@ export default {
 
 .header{
     background-color:#255474;
-    overflow:hidden;
-
+    overflow:auto;
+    margin-bottom:50px;
 }
 
 .header a {

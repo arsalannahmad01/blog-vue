@@ -31,13 +31,13 @@ export default {
       })
 
       if(res.status === 201) {
-        sessionStorage.setItem('token', res.data.token)
+        localStorage.setItem('token', res.data.token)
         this.$router.push({name:"HomePage"})
       }
     }
   },
   async mounted() {
-    let user = await sessionStorage.getItem('token')
+    let user = await localStorage.getItem('token')
     if(user) {
       this.$router.push({name:'HomePage'})
     }
