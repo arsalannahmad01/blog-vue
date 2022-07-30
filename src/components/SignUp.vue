@@ -35,6 +35,7 @@ export default {
 
       if(res.status === 201) {
         localStorage.setItem('token', res.data.token)
+        localStorage.setItem("user-info", res.data.name)
         this.$router.push({name:"HomePage"})
       }
     }

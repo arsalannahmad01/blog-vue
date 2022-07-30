@@ -3,6 +3,8 @@ import Login from './components/Login.vue'
 import SignUp from './components/SignUp.vue'
 import Blog from './components/Blog.vue'
 import Edit from './components/Edit.vue'
+import View from './components/View.vue'
+import Share from './components/Share.vue'
 import { createRouter, createWebHistory } from 'vue-router' 
 
 const routes = [
@@ -30,6 +32,16 @@ const routes = [
         name:"Edit",
         component:Edit,
         path:'/edit-blog/:id'
+    },
+    {
+        name:"ViewBlog",
+        component:View,
+        path:'/view-blog/:id'
+    },
+    {
+        name:"SharePage",
+        component:Share,
+        path:'/:id/share'
     }
 ]
 

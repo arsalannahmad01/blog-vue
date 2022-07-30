@@ -49,20 +49,30 @@ export default {
 <style>
 
 .blog {
-    background-color:red;
-    margin-left:auto;
-    margin-right:auto;
-    padding:30px 25px;
-    width:700px;
-    height:750px;
-    margin-top:100px;
+
 }
 
 .blog input, .blog textarea {
-    display:block;
-    width:600px;
-    padding:10px 20px;
-    margin-bottom:20px;
+    width: 75%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    padding: 10px;
+    background-color:#f7fdfd;
+}
+
+.blog textarea {
+    height: 350px;
+    margin-bottom:10px;
+}
+
+.blog button {
+    width: inherit;
+    padding:10px 200px;
+    border:none;
+    background-color: #255474;
+    color: #FFFFFF;
 }
 
 </style>

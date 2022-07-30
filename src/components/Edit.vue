@@ -1,9 +1,9 @@
 <template>
 <Header />
 <div class="blog">
-<input type="text" placeholder="Title" name="title" v-model="blog.title" />
-<textarea type="text" placeholder="Write your blog" rows="40" name="body"  v-model="blog.body" />
-<button v-on:click="editBlog">Edit</button>
+    <input type="text" placeholder="Title" name="title" v-model="blog.title" />
+    <textarea type="text" placeholder="Write your blog" rows="40" name="body"  v-model="blog.body" />
+    <button v-on:click="editBlog">Edit</button>
 </div>
 </template>
 
@@ -60,20 +60,30 @@ export default {
 <style>
 
 .blog {
-    background-color:red;
-    margin-left:auto;
-    margin-right:auto;
-    padding:30px 25px;
-    width:700px;
-    height:750px;
-    margin-top:100px;
+   
 }
 
 .blog input, .blog textarea {
-    display:block;
-    width:600px;
-    padding:10px 20px;
-    margin-bottom:20px;
+    width: 75%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    padding: 10px;
+    background-color:#f7fdfd;
+}
+
+.blog textarea {
+    height: 400px;
+    margin-bottom:10px;
+}
+
+.blog button {
+    width: inherit;
+    padding:10px 10px;
+    border:none;
+    background-color: #255474;
+    color: #FFFFFF;
 }
 
 </style>

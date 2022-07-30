@@ -6,7 +6,7 @@
       <p>{{item.body}}</p>
       </div>
       <div class="edit-view">
-        <button>View</button>
+        <router-link :to="'/view-blog/' + item._id" ><button>View</button></router-link>
         <router-link :to="'/edit-blog/' + item._id"><button>Edit</button></router-link>
         <button v-on:click="deleteBlog(item._id)" >Delete</button>
       </div>
@@ -28,25 +28,25 @@ export default {
   },
   methods: {
     async loadData() {
-      let user = await localStorage.getItem('token')
-      if(!user) {
-        this.$router.push({name:'LogIn'})
-      }
+      // let user = await localStorage.getItem('token')
+      // if(!user) {
+      //   this.$router.push({name:'LogIn'})
+      // }
 
       let res = await axios.get("/api/v1/blogs",{
         headers: {
-          Authorization: `Bearer ${user}`
+          Authorization: `Bearer ${localStorage.getItem('token')}`
         }
       })
 
-      console.log(res.data)
+      // console.log(res.data)
 
       this.blogs = res.data.blogs
     },
     async deleteBlog(id) {
       let res = await axios.delete("/api/v1/blogs/" + id, {
         headers: {
-          Authorization: `Bearer ${await localStorage.getItem('token')}`
+          Authorization: `Bearer ${localStorage.getItem('token')}`
         }
       })
       if(res.status === 200) {
