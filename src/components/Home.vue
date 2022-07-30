@@ -1,15 +1,13 @@
 <template>
   <Header />
     <div class="blog-list" v-for="item in blogs" :key="item.title">
-      <div class="blog-view" >
       <h2>{{item.title}}</h2>
-      <p>{{item.body}}</p>
+      <div class="blog-view" >
+        <p>{{item.body}}</p>
       </div>
-      <div class="edit-view">
-        <router-link :to="'/view-blog/' + item._id" ><button>View</button></router-link>
-        <router-link :to="'/edit-blog/' + item._id"><button>Edit</button></router-link>
-        <button v-on:click="deleteBlog(item._id)" >Delete</button>
-      </div>
+      <router-link :to="'/view-blog/' + item._id" ><button id="view" >View</button></router-link>
+      <router-link :to="'/edit-blog/' + item._id"><button id="edit" >Edit</button></router-link>
+      <button v-on:click="deleteBlog(item._id)" id="delete" >Delete</button>
     </div>
 </template>
 
@@ -67,47 +65,65 @@ export default {
 
 <style>
 .blog-list {
-  color:#FFFFFF;
-  height:120px;
-  display: block;
+  display: inline-block;
+  position:relative;
+  height:350px;
+  width:400px;
   margin-bottom: 20px;
-  background-color:#349460;
   margin-left: 30px;
-  margin-right: 30px;
-  padding-top: 5px;
-  padding-bottom: 8px;
   border-bottom-style: outset;
+  background-color:#349460;
   border-radius: 5px;
+  color:#FFFFFF;
 }
 
 .blog-view {
-  width:70%;
-  height: 100%;
+  width:100%;
   float:left;
 }
 
 .blog-view h2 {
+  margin-top:2px;
+  margin-left:auto;
+  margin-right:auto;
   text-align:center;
 }
 
-.edit-view {
-  float: right;
-  width: 18%;
-  height: 100%;
-  padding-top: inherit;
-  margin-right:10px;
+.blog-view p {
+  margin: 15px 10px
 }
 
-.edit-view button{
-  color: #ffffff; 
-  background-color: #215563;
-  font-size:14px;
+#view {
+  position:absolute;
+  right:0;
+  bottom: 70px;
+}
+
+#edit {
+  position:absolute;
+  right:0;
+  bottom: 35px;
+}
+
+#delete {
+  position:absolute;
+  left:0;
+  bottom:0;
+  border-bottom-right-radius:5px;
+  border-bottom-left-radius:5px;
+}
+
+.blog-list button{
+  display: block;
+  height:35px;
   font-weight:600;
   margin-top: 5px;
   width: 100%;
-  display: block;
-  padding: 8px 5px;
-  cursor: pointer;
   border: none;
+  border-bottom-style: revert;
+  font-size:14px;
+  background-color: #215563;
+  color: #ffffff; 
+  cursor: pointer;
 }
 </style>
