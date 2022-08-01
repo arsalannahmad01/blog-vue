@@ -84,6 +84,7 @@ export default {
     border:none;
     background-color: #255474;
     color: #FFFFFF;
+    cursor:pointer;
 }
 
 </style>

@@ -6,14 +6,15 @@
         <p>{{item.body}}</p>
       </div>
       <router-link :to="'/view-blog/' + item._id" ><button id="view" >View</button></router-link>
-      <router-link :to="'/edit-blog/' + item._id"><button id="edit" >Edit</button></router-link>
-      <button v-on:click="deleteBlog(item._id)" id="delete" >Delete</button>
+      <router-link v-if="item.author" :to="'/edit-blog/' + item._id"><button id="edit" >Edit</button></router-link>
+      <button v-if="item.author" v-on:click="deleteBlog(item._id)" id="delete" >Delete</button>
     </div>
 </template>
 
 <script>
 import axios from 'axios'
 import Header from './Header.vue'
+import decoder from 'jwt-decode'
 export default {
   name: 'HomePage',
   components: {
@@ -21,11 +22,12 @@ export default {
   },
   data() {
     return {
-      blogs: []
+      blogs: [],
+      author: false,
     }
   },
   methods: {
-    async loadData() {
+    async loadData(ownerId) {
       // let user = await localStorage.getItem('token')
       // if(!user) {
       //   this.$router.push({name:'LogIn'})
@@ -40,6 +42,8 @@ export default {
       // console.log(res.data)
 
       this.blogs = res.data.blogs
+
+      this.blogs.forEach(blog => blog.author = ownerId === blog.createdBy._id)
     },
     async deleteBlog(id) {
       let res = await axios.delete("/api/v1/blogs/" + id, {
@@ -53,28 +57,30 @@ export default {
     }
   },
   async mounted() {
-    let user = await localStorage.getItem('token')
-    if(!user) {
+    let token = await localStorage.getItem('token')
+    if(!token) {
       this.$router.push({name: 'LogIn'})
     }
 
-    this.loadData()
+    // decode jwt token to get user details
+    const user = decoder(token);
+    this.loadData(user.id)
   }
 }
 </script> 
 
 <style>
 .blog-list {
-  display: inline-block;
-  position:relative;
-  height:350px;
-  width:400px;
-  margin-bottom: 20px;
-  margin-left: 30px;
-  border-bottom-style: outset;
-  background-color:#349460;
-  border-radius: 5px;
-  color:#FFFFFF;
+    display: inline-block;
+    position: relative;
+    height: 350px;
+    width: 350px;
+    margin-bottom: 40px;
+    margin-left: 20px;
+    margin-right: 20PX;
+    background-color: #349460;
+    border-radius: 5px;
+    color: #FFFFFF;
 }
 
 .blog-view {
@@ -90,7 +96,9 @@ export default {
 }
 
 .blog-view p {
-  margin: 15px 10px
+  margin: 15px 10px;
+  height:140px;
+  overflow: hidden
 }
 
 #view {
